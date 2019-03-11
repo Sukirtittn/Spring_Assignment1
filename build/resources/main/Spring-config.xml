@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<property xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="databaseBeanByUsingSetters" class="demo.Database">
+        <property name="port" value="18"/>
+        <property name="name" value="oracle"/>
+    </bean>
+
+    <bean id="databaseBeanByUsingConstructor" class="demo.Database">
+        <constructor-arg name="port" value="101"/>
+        <constructor-arg name="name" value="sql-plus"/>
+    </bean>
+<!--..................................................................................-->
+    <!--Restaurant class bean -->
+    <bean id="tea" class="demo.Tea">
+    </bean>
+
+    <bean id="expressTea" class="demo.ExpressTea">
+    </bean>
+
+    <bean id="teaRestaurant" class="demo.Restaurant">
+        <property name="hotDrinks" ref="tea"/>
+    </bean>
+
+
+    <bean id="expressTeaRestaurantViaInnerBean" class="demo.Restaurant">
+    <property name="hotDrinks">
+    <bean id="expressTeaRestaurant" class="demo.Restaurant"/>
+    </property>
+    </bean>
+
+
+    <!--Restaurant class bean -->
+<!--..................................................................................-->
+
+
+    <!--complex class bean -->
+    <bean id="complexBean" class="demo.Complex">
+        <property name="list">
+            <list>
+                <value>Sukirti</value>
+                <value>H.</value>
+                <value>Sharma</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>3</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="sukirti" value="1"/>
+                <entry key="srishty" value="2"/>
+            </map>
+        </property>
+    </bean>
+    <!--complex class bean -->
+
+        </beans>

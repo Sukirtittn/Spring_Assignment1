@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <bean id="databaseBeanByUsingSetters" class="demo.Database">
+        <property name="port" value="18"/>
+        <property name="name" value="oracle"/>
+    </bean>
+
+    <bean id="databaseBeanByUsingConstructor" class="demo.Database">
+        <constructor-arg name="port" value="101"/>
+        <constructor-arg name="name" value="sql-plus"/>
+    </bean>
+<!--..................................................................................-->
+    <!--Restaurant class bean -->
+    <bean id="tea" class="demo.Tea">
+    </bean>
+    <bean id="hotDrinks" class="demo.Tea" primary="true">
+    </bean>
+
+    <bean id="expressTea" class="demo.ExpressTea">
+    </bean>
+    <!--..................................................................................-->
+<!--autowire by name-->
+    <bean id="teaViaAutowireByName" class="demo.Restaurant" autowire="byName"></bean>
+    <!--..................................................................................-->
+    <!--autowire by type-->
+
+    <!--<bean id="teaViaAutowireByType" class="demo.Restaurant" autowire="byType"></bean>-->
+
+    <!--..................................................................................-->
+    <!--autowire by constructor-->
+
+    <bean id="teaViaAutowireByConstructor" class="demo.Restaurant" autowire="constructor">
+        <property name="hotDrinks" ref="tea"></property>
+    </bean>
+
+    <!--..................................................................................-->
+
+    <bean id="teaRestaurant" class="demo.Restaurant" scope="prototype">
+        <property name="hotDrinks" ref="tea"/>
+    </bean>
+
+
+    <bean id="expressTeaRestaurantViaInnerBean" class="demo.Restaurant">
+    <property name="hotDrinks">
+    <bean id="expressTeaRestaurant" class="demo.ExpressTea"/>
+    </property>
+    </bean>
+
+
+    <!--Restaurant class bean -->
+<!--..................................................................................-->
+
+
+    <!--complex class bean -->
+    <bean id="complexBean" class="demo.Complex">
+        <property name="list">
+            <list>
+                <value>Sukirti</value>
+                <value>H.</value>
+                <value>Sharma</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>3</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="sukirti" value="1"/>
+                <entry key="srishty" value="2"/>
+            </map>
+        </property>
+    </bean>
+    <!--complex class bean -->
+    <context:annotation-config/>
+    <context:component-scan base-package="demo"/>
+        </beans>
